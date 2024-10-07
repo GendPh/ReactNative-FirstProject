@@ -18,7 +18,7 @@ const ButtonComponentCustom = ({
       activeOpacity={0.7}
     >
       <Text className={`text-primary font-psemibold text-lg ${textStyles}`}>
-        Custom Button
+        {title}
       </Text>
     </TouchableOpacity>
   );
