@@ -1,8 +1,7 @@
-import { Link } from "expo-router";
-import { Text, View, Image, ScrollView } from "react-native";
+import { Text, View, Image, ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
-import { CustomButton } from "../components/CustomButton";
+import ButtonComponentCustom from "../components/CustomButton";
 
 export default function Index() {
   return (
@@ -34,10 +33,16 @@ export default function Index() {
             Where creativity meets innovation: embark on a journey of limitless
             exploration with Aora
           </Text>
-          
-          <CustomButton />
+
+          <ButtonComponentCustom
+            title="Continue with Email"
+            handlePress={() => {}}
+            containerStyles="w-full mt-7"
+          />
         </View>
       </ScrollView>
+
+      <StatusBar style="light" backgroundColor="#161622" />
     </SafeAreaView>
   );
 }
