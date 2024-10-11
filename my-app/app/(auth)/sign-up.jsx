@@ -8,6 +8,7 @@ import ButtonComponentCustom from "../../components/CustomButton";
 
 const SignUp = () => {
   const [form, setForm] = useState({
+    userName: "",
     email: "",
     password: "",
   });
@@ -26,9 +27,15 @@ const SignUp = () => {
             className="w-[115px] h-[35px]"
           />
           <Text className="text-2xl text-white font-psemibold mt-10 ">
-            Log in to Aora
+            Sign Up to Aora
           </Text>
 
+          <FormField
+            title="User Name"
+            value={form.userName}
+            handleChangeText={(e) => setForm({ ...form, userName: e })}
+            otherStyles="mt-10"
+          />
           <FormField
             title="Email"
             value={form.email}
@@ -44,7 +51,7 @@ const SignUp = () => {
           />
 
           <ButtonComponentCustom
-            title="Sign in"
+            title="Sign Up"
             handlePress={submit}
             containerStyles="mt-7"
             isLoading={isSubmitting}
@@ -52,13 +59,13 @@ const SignUp = () => {
 
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">
-              Don't have an account?
+              Already have an account?
             </Text>
             <Link
-              href="/sign-up"
+              href="/sign-in"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign Up
+              Sign In
             </Link>
           </View>
         </View>
