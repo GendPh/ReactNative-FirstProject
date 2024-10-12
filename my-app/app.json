@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.first-react-native"
+      "package": "com.reactNativeAoraProject"
     },
     "android": {
       "adaptiveIcon": {
