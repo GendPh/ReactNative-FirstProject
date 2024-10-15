@@ -31,7 +31,6 @@ const SignUp = () => {
     } finally {
       setIsSubmitting(false);
     }
-
   };
 
   return (
