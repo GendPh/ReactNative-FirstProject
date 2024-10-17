@@ -10,13 +10,24 @@ export const appWriteConfig = {
   storageId: '670a937b0012fce043e4',
 }
 
+const {
+  endpoint,
+  platform,
+  projectId,
+  databaseId,
+  userCollectionId,
+  videosCollectionId,
+  storageId,
+} = appWriteConfig;
+
+
 // Init your React Native SDK
 const client = new Client();
 
 client
-  .setEndpoint(appWriteConfig.endpoint) // Your Appwrite Endpoint
-  .setProject(appWriteConfig.projectId) // Your project ID
-  .setPlatform(appWriteConfig.platform) // Your application ID or bundle ID.
+  .setEndpoint(endpoint) // Your Appwrite Endpoint
+  .setProject(projectId) // Your project ID
+  .setPlatform(platform) // Your application ID or bundle ID.
   ;
 
 
@@ -36,8 +47,8 @@ export const createUser = async (email, password, userName) => {
     await signIn(email, password);
 
     const newUser = await databases.createDocument(
-      appWriteConfig.databaseId,
-      appWriteConfig.userCollectionId,
+      databaseId,
+      userCollectionId,
       ID.unique(),
       {
         accountId: newAccount.$id,
@@ -70,8 +81,8 @@ export const getCurrentUser = async () => {
     if (!currentAccount) throw new Error('No current user found');
 
     const currentUser = await databases.listDocuments(
-      appWriteConfig.databaseId,
-      appWriteConfig.userCollectionId,
+      databaseId,
+      userCollectionId,
       [Query.equal('accountId', currentAccount.$id)]
     );
 
@@ -84,3 +95,32 @@ export const getCurrentUser = async () => {
     throw new Error(`Get Current User Error: ${error}`);
   }
 };
+
+
+export const getAllPosts = async () => {
+  try {
+
+    const posts = await databases.listDocuments(databaseId, videosCollectionId);
+
+    return posts.documents;
+
+  } catch (error) {
+    console.log(`Get All Posts Error: ${error}`);
+    throw new Error(`Get All Posts Error: ${error}`);
+
+  }
+}
+
+export const getLatestPosts = async () => {
+  try {
+
+    const posts = await databases.listDocuments(databaseId, videosCollectionId, [Query.orderDesc('$createdAt', Query.limit(7))]);
+
+    return posts.documents;
+
+  } catch (error) {
+    console.log(`Get All Posts Error: ${error}`);
+    throw new Error(`Get All Posts Error: ${error}`);
+
+  }
+}
